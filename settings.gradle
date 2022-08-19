@@ -1,0 +1,3 @@
+rootProject.name = "WekaAPK"
+include ':app'
+include ':nativetemplates'

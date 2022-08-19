@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item android:title="Follow Us On - ">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item android:id="@+id/Youtube" android:icon="@drawable/youtube"
+                    android:title="Youtube" />
+                <item android:id="@+id/Instagram" android:icon="@drawable/instagram2"
+                    android:title="Instagram" />
+                <item android:id="@+id/TikTok" android:icon="@drawable/tiktok"
+                    android:title="Tiktok" />
+
+            </group>
+        </menu>
+    </item>
+
+
+    <item android:title="Don't forget to download our apps -">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:id="@+id/moreSettings" android:icon="@drawable/more_settings"
+                    android:title="Our Apps" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Help -">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:id="@+id/helpCenter" android:icon="@drawable/customer_service"
+                    android:title="Help Center" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Other -">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:id="@+id/Rate" android:icon="@drawable/star"
+                    android:title="Rate App" />
+
+                <item android:id="@+id/Share" android:icon="@android:drawable/ic_menu_share"
+                    android:title="Share" />
+                <item android:id="@+id/Email" android:icon="@drawable/gmail"
+                    android:title="Contact Us" />
+
+            </group>
+        </menu>
+    </item>
+</menu>

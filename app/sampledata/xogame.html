@@ -1,0 +1,852 @@
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Amatic+SC|Dawning+of+a+New+Day|League+Script|Loved+by+the+King|Waiting+for+the+Sunrise');
+
+body,html {
+  height:100%;
+}
+body {
+  display:flex;
+  flex-flow:column no-wrap;
+  justify-content:center;
+  align-items:center;
+  align-content:center;
+
+}
+.paper {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width: 800px;
+  height: 1400px;
+  background-image:
+    -webkit-repeating-linear-gradient(
+      left,
+      lightblue,
+      1px,
+      transparent 1px,
+      transparent 20px
+    ),
+    -webkit-repeating-linear-gradient(
+      bottom,
+      lightblue,
+      1px,
+      white 1px,
+      white 20px
+    );
+
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      lightblue,
+      1px,
+      transparent 1px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      lightblue,
+      1px,
+      white 1px,
+      white 20px
+    );
+  background-size: 20px 20px;
+  background-origin: content-box;
+  padding: 1em auto;
+  position:relative;
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.1) inset;
+  }
+
+.rotated {
+  transform: rotate(-3deg);
+}
+
+.paper:after, .paper:before {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  left: auto;
+  max-width:300px;
+  background: white;
+  transform: rotate(-3deg);
+}
+
+  .paper:after {
+  bottom: 10px;
+  right: 7px;
+  width: 70%;
+  top: 80%;
+  box-shadow: 3px 15px 12px #777;
+  transform: rotate(3deg);
+    }
+
+.paper:before {
+  bottom: 10px;
+  left: 7px;
+  width: 70%;
+  top: 80%;
+  box-shadow: -3px 15px 12px #777;
+  transform: rotate(-3deg);
+  }
+
+#board {
+  position:relative;
+  display:flex;
+  flex-flow:row wrap;
+  justify-content:center;
+  align-items:center;
+  width:50%;
+  height:300px;
+  margin:50px auto;
+
+
+}
+#logo {
+  width:35%;
+  height:auto;
+  margin:30px;
+  svg {
+    fill: #000033;
+
+  }
+}
+#gameboard {
+  position:absolute;
+  top:5px;
+  left:20px;
+  width:100%;
+  height:auto;
+  stroke-dasharray: 250;
+  stroke-dashoffset: 250;
+  stroke: #000033;
+  stroke-width:1.25px;
+  stroke-miterlimit:10;
+  fill:none;
+  }
+
+  .st4{stroke-width:2;stroke-miterlimit:10;
+  }
+
+draw {
+  animation: dash 0.5s ease-in-out forwards;
+
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+.tile {
+  margin:5%;
+  width:22%;
+  height:22%;
+  border-radius:5px;
+ // background:black;
+  cursor:pointer;
+  z-index:2;
+ // float:left;
+
+}
+#winner {
+  width:300px;
+  height:40px;
+  margin: auto;
+  margin-top:30px;
+  position:absolute;
+  align-self:flex-start;
+  text-align:center;
+  transform:rotate(5deg);
+}
+#reset {
+  margin:0.5vh;
+  padding:0;
+  width:50%;
+  height:30px;
+  vertical-align:middle;
+  text-align:center;
+  border-radius:20px;
+  cursor:pointer;
+  float:left;
+}
+
+//settings
+h1, h2 {
+ font-family:'Waiting for the Sunrise', cursive;
+  margin:0;
+  font-size:40px;
+  color:  #000033;
+}
+#settings, .container, .options {
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+}
+
+#settings {
+  height:70%;
+  align-items:center;
+  align-content:center;
+  .container {
+     height:30%;
+     align-items:center;
+    .options {
+     flex-direction:row;
+     width:60%;
+
+    }
+  }
+}
+
+.btn {
+  cursor:pointer;
+  transition: all .2s ease-in-out;
+  &:hover {
+    transform:rotate(3deg) scale(1.3);
+  }
+}
+
+.disable {
+  display:none!important;
+}
+.fadeBounceIn {
+ animation: fadeBounceIn 1s ease-in-out forwards;
+}
+.fadeIn {
+ animation: fadeIn 2s ease-in-out forwards;
+}
+@keyframes fadeBounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  80% {
+
+transform: scale(1.4);
+
+  }
+  100% {
+     opacity: 1;
+     transform: scale(1);
+  }
+}
+@keyframes fadeIn {
+  0% { opacity: 0;}
+  100% {opacity: 1;}
+}
+</style>
+
+<div class="rotated">
+    <div class="paper">
+        <div id="settings">
+            <div class='container'>
+                <h1 class="sets welcome">  X O Game
+                    <h1 class="sets chooses disable" id="opponent">CHOOSE YOUR OPPONENT</h1>
+                    <h1 class="sets destiny disable" id="destiny">Choose your destiny</h1>
+            </div>
+
+            <div id="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 231.9 179.6"><path d="M59.5 0c0 0-0.1 2.9-0.3 7.9 -0.1 2.5-0.2 5.5-0.3 9 -0.1 3.5-0.2 7.4-0.3 11.7 -0.1 4.3-0.2 8.9-0.2 13.8 -0.1 4.9 0 10.1-0.1 15.4 0 5.4 0 10.9 0.1 16.5 0.1 5.6 0.2 11.3 0.4 17 0.2 5.7 0.3 11.4 0.6 17 0.2 5.6 0.5 11.1 0.8 16.5 0.4 5.3 0.6 10.5 1 15.4 0.3 4.9 0.7 9.5 1 13.8 0.4 4.3 0.7 8.2 1 11.7 0.3 3.5 0.6 6.5 0.8 9 0.5 5 0.8 7.8 0.8 7.8s-0.4-2.8-1-7.8c-0.3-2.5-0.7-5.5-1.1-9 -0.2-1.7-0.4-3.6-0.6-5.5 -0.2-1.9-0.4-4-0.6-6.1 -0.4-4.3-0.8-8.9-1.3-13.8 -0.4-4.9-0.8-10.1-1.2-15.4 -0.3-5.4-0.7-10.9-0.9-16.5 -0.3-5.6-0.5-11.3-0.7-17 -0.1-5.7-0.3-11.4-0.3-17.1 -0.1-5.6-0.1-11.2-0.1-16.5 0.1-5.4 0.1-10.5 0.3-15.5 0.1-4.9 0.3-9.6 0.4-13.8 0.1-2.1 0.2-4.2 0.2-6.1 0.1-2 0.2-3.8 0.3-5.5 0.2-3.5 0.4-6.5 0.5-9C59.3 2.9 59.5 0 59.5 0z"/><path d="M131.9 1.3c0 0 0.2 0.6 0.6 1.8 0.2 0.6 0.4 1.3 0.7 2.2 0.3 0.9 0.5 1.9 0.8 3 0.3 1.1 0.6 2.4 0.9 3.7 0.2 0.7 0.3 1.4 0.5 2.1 0.1 0.7 0.3 1.5 0.4 2.3 0.6 3.2 1.1 6.8 1.6 10.8 0.4 4 0.7 8.3 0.8 12.9 0.1 4.6 0.2 9.4 0 14.4 -0.3 10-0.9 20.6-1.4 31.2 -0.6 10.6-1.2 21.2-1.7 31.2 -0.6 9.9-1.2 19.2-1.6 27.2 -0.5 8-1 14.6-1.3 19.2 -0.3 4.6-0.5 7.3-0.5 7.3s0.1-2.7 0.3-7.3c0.2-4.6 0.4-11.3 0.8-19.3 0.4-8 0.8-17.3 1.2-27.2 0.5-10 1-20.6 1.6-31.2 0.6-10.6 1.3-21.2 1.6-31.2 0.1-5 0.2-9.8 0.2-14.3 0-4.6-0.3-8.9-0.6-12.8 -0.2-2-0.3-3.9-0.6-5.7 -0.1-0.9-0.2-1.8-0.3-2.6 -0.1-0.8-0.3-1.7-0.4-2.5 -0.1-0.8-0.3-1.6-0.4-2.3 -0.1-0.7-0.3-1.5-0.4-2.1 -0.3-1.4-0.5-2.6-0.8-3.8 -0.3-1.1-0.5-2.1-0.7-3 -0.2-0.9-0.5-1.6-0.6-2.2C132 1.9 131.9 1.3 131.9 1.3z"/><path d="M0 75.6c0 0 3.5-0.6 9.7-1.7 3.1-0.5 6.8-1.2 11.1-2 4.3-0.8 9.2-1.6 14.5-2.4 10.6-1.7 23-3.7 36.3-5.7 13.3-2 27.5-4 41.7-5.9 14.2-1.8 28.4-3.6 41.8-5.2 13.3-1.5 25.8-2.8 36.5-3.9 5.3-0.6 10.2-1 14.6-1.4 4.3-0.4 8.1-0.7 11.3-1 6.2-0.5 9.8-0.9 9.8-0.9s-3.6 0.4-9.8 1.1c-6.2 0.7-15.1 1.7-25.8 2.9 -5.3 0.6-11.1 1.3-17.2 2 -6.1 0.7-12.6 1.5-19.2 2.3 -13.3 1.6-27.5 3.4-41.7 5.3C99.2 61 85 62.9 71.7 64.9c-6.6 1-13.1 1.9-19.2 2.8 -6.1 0.9-11.8 1.8-17.2 2.6 -10.6 1.6-19.5 3-25.7 3.9C3.5 75.1 0 75.6 0 75.6z"/><path d="M-0.8 128.8c0 0 3.7-0.1 10-0.2 3.2-0.1 7.1-0.2 11.5-0.3 4.4-0.1 9.5-0.3 14.9-0.5 5.5-0.2 11.4-0.4 17.7-0.7 6.3-0.3 12.9-0.7 19.7-1 6.8-0.4 13.9-0.8 21.1-1.3 7.2-0.5 14.4-1 21.7-1.6 7.3-0.6 14.6-1.2 21.7-1.8 7.2-0.6 14.2-1.4 21-2 6.8-0.8 13.4-1.4 19.6-2.1 6.2-0.7 12.1-1.4 17.6-2.1 5.4-0.7 10.4-1.3 14.8-1.9 4.4-0.6 8.3-1.1 11.4-1.5 6.3-0.9 9.9-1.4 9.9-1.4s-3.6 0.6-9.9 1.6c-3.2 0.5-7 1.1-11.4 1.7 -2.2 0.3-4.5 0.7-7 1 -2.5 0.3-5.1 0.7-7.8 1.1 -5.4 0.8-11.3 1.5-17.5 2.3 -6.2 0.8-12.8 1.5-19.6 2.3 -6.8 0.7-13.8 1.5-21 2.1 -7.2 0.7-14.4 1.3-21.7 1.9 -7.3 0.5-14.6 1.1-21.7 1.5 -7.2 0.5-14.2 0.8-21.1 1.2 -6.8 0.3-13.5 0.6-19.7 0.8 -6.3 0.2-12.2 0.4-17.7 0.5 -2.7 0.1-5.4 0.1-7.9 0.2 -2.5 0-4.9 0-7.1 0.1 -4.5 0-8.3 0.1-11.5 0.1C2.8 128.8-0.8 128.8-0.8 128.8z"/><path d="M183.1 4.6c0 0-0.1 0.5-0.4 1.4 -0.3 0.9-0.6 2.1-1.1 3.6 -0.5 1.5-1 3.2-1.7 5 -0.7 1.8-1.4 3.8-2.2 5.7 -1.6 3.9-3.3 7.6-4.7 10.4 -0.7 1.4-1.3 2.5-1.8 3.3 -0.4 0.8-0.7 1.2-0.7 1.2s0.2-0.5 0.5-1.3c0.3-0.9 0.8-2.1 1.3-3.5 0.6-1.4 1.2-3.1 1.9-4.9 0.7-1.8 1.5-3.7 2.3-5.6 0.8-1.9 1.6-3.8 2.3-5.6 0.8-1.8 1.5-3.5 2.1-4.9 0.6-1.4 1.1-2.6 1.5-3.5C182.9 5.1 183.1 4.6 183.1 4.6z"/><path d="M159.6 6.8c0 0 1.5 1.7 3.6 4.3 0.6 0.6 1.1 1.3 1.8 2.1 0.6 0.7 1.3 1.5 2 2.3 1.4 1.6 2.9 3.2 4.5 4.8 1.6 1.6 3.1 3.2 4.6 4.7 0.8 0.7 1.5 1.4 2.2 2.1 0.7 0.7 1.4 1.3 2 1.9 2.5 2.3 4.1 3.8 4.1 3.8s-0.5-0.3-1.3-0.9c-0.8-0.6-2-1.4-3.3-2.4 -1.4-1-2.9-2.3-4.5-3.7 -0.8-0.7-1.6-1.4-2.4-2.2 -0.8-0.8-1.6-1.6-2.4-2.4 -0.8-0.8-1.6-1.6-2.3-2.5 -0.8-0.8-1.4-1.7-2.1-2.5 -1.3-1.6-2.6-3.2-3.5-4.6 -1-1.4-1.7-2.6-2.3-3.4C159.9 7.3 159.6 6.8 159.6 6.8z"/><path d="M101.8 141.7c0 0-0.2 0.3-0.6 0.8 -0.2 0.2-0.4 0.6-0.6 0.9 -0.1 0.2-0.2 0.4-0.3 0.6 -0.1 0.2-0.2 0.4-0.3 0.7 -0.2 0.5-0.4 1-0.6 1.5 -0.2 0.6-0.4 1.2-0.5 1.8 -0.3 1.2-0.6 2.6-0.9 4 -0.2 0.7-0.3 1.4-0.5 2.1 -0.1 0.7-0.4 1.3-0.5 2 -0.2 0.6-0.4 1.3-0.7 1.8 -0.2 0.6-0.5 1.1-0.8 1.6 -0.1 0.2-0.3 0.5-0.4 0.7 -0.1 0.2-0.3 0.4-0.4 0.6 -0.3 0.4-0.5 0.6-0.7 0.9 -0.4 0.4-0.7 0.7-0.7 0.7s0.2-0.3 0.5-0.8c0.2-0.2 0.3-0.6 0.5-1 0.1-0.2 0.2-0.4 0.3-0.6 0.1-0.2 0.2-0.5 0.3-0.7 0.2-0.5 0.4-1 0.5-1.6 0.2-0.6 0.3-1.2 0.5-1.8 0.3-1.3 0.6-2.6 0.8-4 0.2-0.7 0.3-1.4 0.5-2.1 0.2-0.7 0.4-1.3 0.6-2 0.2-0.6 0.5-1.2 0.7-1.8 0.3-0.6 0.5-1.1 0.9-1.5 0.2-0.2 0.3-0.4 0.4-0.6 0.2-0.2 0.3-0.4 0.5-0.5 0.3-0.3 0.6-0.6 0.8-0.8C101.5 141.9 101.8 141.7 101.8 141.7z"/><path d="M86.6 143.9c0 0 1.3 0.8 3.2 2.1 1.9 1.3 4.4 3.2 6.8 5.1 2.4 1.9 4.7 3.9 6.5 5.5 1.7 1.6 2.8 2.7 2.8 2.7s-1.3-0.8-3.2-2.1c-1.9-1.3-4.4-3.2-6.8-5.1 -2.4-1.9-4.7-3.9-6.5-5.5C87.6 145 86.6 143.9 86.6 143.9z"/><path d="M35.7 87.8c0 0-1.2 1.3-3 3.3 -0.4 0.5-0.9 1-1.4 1.6 -0.5 0.6-1 1.2-1.6 1.8 -1.1 1.3-2.2 2.6-3.4 4 -1.1 1.4-2.2 2.8-3.2 4.1 -0.5 0.7-1 1.3-1.4 1.9 -0.4 0.6-0.9 1.2-1.3 1.7 -1.6 2.2-2.6 3.6-2.6 3.6s0.2-0.4 0.5-1.1c0.3-0.7 0.8-1.7 1.5-2.9 0.6-1.2 1.5-2.5 2.4-3.9 0.5-0.7 1-1.4 1.5-2.1 0.5-0.7 1.1-1.4 1.6-2.1 0.6-0.7 1.2-1.4 1.7-2 0.6-0.7 1.2-1.3 1.8-1.9 1.2-1.2 2.3-2.3 3.3-3.2 1-0.9 1.9-1.6 2.5-2.1C35.3 88.1 35.7 87.8 35.7 87.8z"/><path d="M14 89.2c0 0 0.9 0.7 2.1 1.9 1.2 1.2 2.8 2.8 4.3 4.4 1.5 1.7 2.9 3.4 3.9 4.8 1 1.4 1.6 2.3 1.6 2.3s-0.9-0.7-2.1-1.9c-1.2-1.2-2.8-2.8-4.3-4.4 -1.5-1.7-2.9-3.4-3.9-4.8C14.6 90.2 14 89.2 14 89.2z"/><path d="M40.3 149.1c0 0-0.3 0.3-0.7 0.9 -0.5 0.6-1.1 1.4-1.9 2.3 -1.6 1.9-3.8 4.4-5.9 6.9 -2.2 2.5-4.3 5-5.9 6.9 -0.8 0.9-1.5 1.7-2 2.3 -0.5 0.5-0.8 0.8-0.8 0.8s0.2-0.4 0.6-1c0.4-0.6 0.9-1.5 1.6-2.5 0.7-1 1.5-2.2 2.5-3.5 0.9-1.2 2-2.5 3.1-3.8 1.1-1.3 2.2-2.5 3.3-3.6 1.1-1.1 2.1-2.1 3-3 0.9-0.9 1.7-1.5 2.3-2C40 149.4 40.3 149.1 40.3 149.1z"/><path d="M22.4 148.1c0 0 0.3 0.4 0.9 1 0.5 0.6 1.3 1.6 2.2 2.7 0.9 1.1 1.9 2.5 3 4 1.1 1.5 2.1 3.1 3.2 4.7 1 1.6 2.1 3.3 3 4.8 0.9 1.6 1.7 3 2.4 4.3 0.7 1.3 1.2 2.4 1.6 3.1 0.4 0.8 0.6 1.2 0.6 1.2s-0.3-0.4-0.8-1.1c-0.5-0.7-1.2-1.7-2-2.9 -0.8-1.2-1.7-2.6-2.7-4.1 -1-1.5-2-3.1-3.1-4.7 -1-1.6-2.1-3.2-3.1-4.8 -1-1.5-1.9-2.9-2.7-4.2 -0.8-1.2-1.4-2.3-1.9-3C22.6 148.5 22.4 148.1 22.4 148.1z"/><path d="M98.5 17.2c0 0-0.1 0-0.3 0.1 -0.2 0-0.5 0.1-0.9 0.1 -0.8 0-1.9-0.3-3.2-0.9 -1.3-0.6-2.8-1.6-4.8-1.8 -1.9-0.3-4.2 0.2-6.4 1.2 -2.2 1.1-4.2 2.8-5.9 5 -1.7 2.2-3.1 4.8-3.9 7.8 -0.4 1.4-0.7 3-0.8 4.5 -0.1 1.5 0 3.1 0.3 4.6 0.4 1.5 0.9 3 1.8 4.3 0.9 1.3 1.9 2.5 3.3 3.2 1.3 0.7 2.9 0.7 4.3 0.2 1.5-0.5 2.8-1.4 4.1-2.4 2.6-1.9 5.1-4 7.3-6.1 2.3-2.1 4.3-4.2 6.2-6.4 1.8-2.1 3.6-4.2 4.9-6.2 0.6-1 1-2.1 1-3.2 0-1.1-0.4-2.1-0.9-2.9 -1-1.7-2.6-2.7-3.8-3.3 -1.3-0.6-2.4-1-3.1-1.2 -0.7-0.2-1.1-0.4-1.1-0.4s0.4 0.1 1.1 0.3c0.7 0.2 1.9 0.5 3.2 1.1 1.3 0.6 2.9 1.5 4.1 3.3 0.6 0.9 1 1.9 1.1 3.1 0.1 1.2-0.3 2.5-1 3.6 -1.4 2.1-3 4.2-4.9 6.5 -1.8 2.2-3.9 4.4-6.2 6.6 -2.3 2.1-4.7 4.2-7.4 6.2 -1.3 1-2.7 2-4.4 2.6 -0.8 0.3-1.7 0.5-2.7 0.5 -0.9 0-1.8-0.3-2.6-0.7 -3.2-1.8-4.9-5.1-5.6-8.4 -0.4-1.7-0.4-3.3-0.3-5 0.1-1.6 0.4-3.2 0.9-4.8 0.9-3 2.5-5.8 4.3-8 1.9-2.2 4-4 6.3-5.1 2.3-1.1 4.7-1.5 6.8-1.1 1 0.2 1.9 0.5 2.7 0.9 0.8 0.4 1.5 0.8 2.1 1.1 1.3 0.7 2.4 1 3.1 1.1 0.4 0 0.7 0 0.9 0C98.4 17.3 98.5 17.2 98.5 17.2z"/><path d="M180.2 72.9c0 0-0.3-0.2-0.7-0.5 -0.2-0.2-0.6-0.3-0.9-0.5 -0.4-0.2-0.8-0.4-1.3-0.6 -1-0.4-2.3-0.6-3.8-0.6 -1.5 0-3.1 0.3-4.8 1.1 -0.8 0.4-1.6 0.9-2.3 1.5 -0.2 0.2-0.4 0.3-0.5 0.5l-0.5 0.6c-0.3 0.4-0.6 0.7-0.9 1.2 -1.1 1.7-1.8 3.8-2 6 -0.2 2.2 0.2 4.6 1.2 6.6 1 2 2.8 3.9 5 4.1 1.1 0.1 2.2-0.2 3.2-0.8 1.1-0.5 2.1-1.2 3.1-1.8 2-1.3 3.8-2.8 5.5-4.4 1.6-1.6 3.1-3.2 4.1-5 0.5-0.9 0.9-1.8 1-2.8 0.2-0.9 0.1-1.9 0-2.7 -0.3-1.7-1.3-3.2-2.2-4.3 -1-1.1-2-2-2.8-2.6 -0.9-0.6-1.6-1.1-2.1-1.4 -0.5-0.3-0.8-0.4-0.8-0.4s0.3 0.1 0.8 0.4c0.5 0.3 1.3 0.6 2.2 1.2 0.9 0.6 2 1.4 3 2.5 1 1.1 2.1 2.6 2.5 4.5 0.2 1 0.3 2 0.1 3 -0.2 1-0.5 2.1-1 3 -1 2-2.5 3.7-4.2 5.4 -1.7 1.7-3.5 3.2-5.6 4.6 -1 0.7-2.1 1.3-3.2 1.9 -1.1 0.6-2.5 1-3.9 0.9 -1.4-0.1-2.7-0.8-3.6-1.7 -1-0.9-1.7-2-2.3-3.1 -1.1-2.3-1.5-4.9-1.3-7.2 0.2-2.4 1-4.7 2.3-6.4 1.3-1.8 3-3.1 4.8-3.8 1.8-0.8 3.5-1 5.1-0.9 1.5 0.1 2.8 0.4 3.9 0.8 0.5 0.2 0.9 0.5 1.3 0.6 0.3 0.2 0.7 0.4 0.9 0.6C180 72.7 180.2 72.9 180.2 72.9z"/><path d="M183.5 138.2c0 0-0.2-0.3-0.6-0.7 -0.4-0.5-1-1.1-1.8-1.8 -0.8-0.7-2-1.4-3.4-1.9 -1.4-0.4-3.2-0.5-4.9 0.1 -1.7 0.7-3.2 2-4.6 3.7 -1.4 1.6-2.7 3.5-3.3 5.7 -0.3 1.1-0.5 2.2-0.3 3.3 0 0.3 0.1 0.6 0.2 0.8 0.1 0.3 0.2 0.6 0.3 0.9 0.2 0.5 0.5 1 0.8 1.5 1.4 1.9 3.6 3.2 5.9 4 1.2 0.4 2.3 0.8 3.5 1.1 1.2 0.3 2.4 0.4 3.4 0.1 0.3-0.1 0.5-0.2 0.8-0.3 0.2-0.1 0.4-0.3 0.6-0.5 0.4-0.4 0.8-0.8 1.1-1.3 0.6-1 1.1-2.1 1.6-3.2 1-2.2 1.9-4.2 2.5-6.3 0.6-2 1-4 1-5.9 0-1.8-0.4-3.5-0.9-5 -0.5-1.4-1.3-2.5-2-3.4 -0.7-0.8-1.4-1.3-1.9-1.7 -0.5-0.3-0.8-0.5-0.8-0.5s0.3 0.1 0.8 0.4c0.5 0.3 1.3 0.8 2.1 1.6 0.8 0.8 1.6 1.9 2.3 3.4 0.6 1.4 1.1 3.2 1.2 5.1 0.1 1.9-0.2 4-0.8 6.2 -0.6 2.1-1.4 4.3-2.4 6.5 -0.5 1.1-0.9 2.2-1.6 3.3 -0.3 0.5-0.8 1.1-1.3 1.5 -0.3 0.2-0.5 0.4-0.9 0.6 -0.3 0.2-0.6 0.3-1 0.4 -1.4 0.4-2.8 0.2-4-0.1 -1.3-0.3-2.5-0.6-3.7-1.1 -2.4-0.9-4.8-2.3-6.4-4.5 -0.4-0.5-0.7-1.1-1-1.8 -0.1-0.3-0.2-0.6-0.3-0.9 -0.1-0.4-0.1-0.7-0.2-1 -0.1-1.3 0-2.6 0.4-3.8 0.8-2.4 2.2-4.3 3.7-6 1.5-1.6 3.2-3 5-3.7 1.9-0.7 3.8-0.5 5.3 0.1 1.5 0.6 2.6 1.4 3.4 2.1 0.8 0.7 1.4 1.4 1.7 1.9C183.3 137.9 183.5 138.2 183.5 138.2z"/><path d="M95.9 83.3c0 0-0.9 0.4-2.4 1.1 -1.5 0.8-3.7 1.9-5.8 3.9 -1 1-2 2.2-2.7 3.7 -0.7 1.5-1.1 3.1-0.9 4.8 0 0.4 0.1 0.8 0.2 1.3 0.1 0.4 0.3 0.8 0.5 1.2 0.4 0.8 0.9 1.5 1.5 2.1 1.3 1.3 3 2.1 4.8 2.2 1.8 0.1 3.6-0.5 5-1.5 1.5-1 2.5-2.5 2.9-4.2 0.5-1.7 0.6-3.4 0.7-5.1 0.1-1.7 0.2-3.2 0-4.6 -0.2-1.4-0.6-2.6-1.3-3.6 -0.6-1-1.4-1.6-2.2-2 -0.7-0.4-1.4-0.7-1.8-0.8 -0.2 0-0.4-0.2-0.5-0.2 -0.1 0-0.2 0-0.2 0s0.1 0.2 0.2 0.1c0.1 0 0.3 0 0.5 0.1 0.5 0 1.1 0.1 1.9 0.5 0.8 0.4 1.7 1 2.4 2 0.8 1 1.3 2.3 1.6 3.8 0.3 1.5 0.3 3.1 0.2 4.8 -0.1 1.7-0.1 3.5-0.5 5.3 -0.4 1.9-1.6 3.7-3.3 4.9 -1.6 1.2-3.7 1.9-5.8 1.8 -2.1-0.2-4.1-1.2-5.5-2.6 -0.7-0.7-1.3-1.6-1.7-2.5 -0.2-0.5-0.4-0.9-0.5-1.4 -0.1-0.4-0.2-1-0.2-1.4 -0.2-1.9 0.4-3.8 1.2-5.3 0.8-1.5 1.9-2.8 3-3.8 1.1-1 2.3-1.7 3.3-2.3 1.1-0.6 2-1 2.8-1.3 0.8-0.3 1.4-0.5 1.9-0.7C95.6 83.4 95.9 83.3 95.9 83.3z"/><path d="M26.3 35.6c0 0-0.2-0.1-0.7-0.3 -0.4-0.2-1.1-0.4-2-0.4 -0.9-0.1-1.9 0-3.1 0.3 -1.2 0.3-2.4 1-3.5 1.9 -0.6 0.5-1.1 1-1.6 1.7 -0.2 0.3-0.4 0.7-0.6 1 -0.2 0.4-0.4 0.8-0.5 1.1 -0.6 1.5-0.8 3.3-0.7 5.2 0.1 1.8 0.6 3.7 1.5 5.4 0.8 1.7 2 3.3 3.6 4.5 1.5 1.2 3.4 1.8 5.2 1.4 1.8-0.4 3.2-1.8 4.1-3.3 0.9-1.6 1.5-3.3 2-5 0.4-1.7 0.9-3.3 0.7-4.7 -0.2-1.4-1.2-2.4-2.2-3 -1.1-0.6-2.1-0.8-3-0.9 -0.9-0.1-1.6-0.2-2-0.2 -0.5 0-0.7 0-0.7 0s0.3 0 0.7 0c0.5 0 1.2 0 2.1 0 0.9 0.1 2 0.2 3.2 0.7 0.6 0.3 1.2 0.6 1.7 1.2 0.3 0.3 0.5 0.6 0.7 1 0.1 0.3 0.3 0.7 0.4 1.1 0.2 0.8 0.1 1.7 0 2.5 -0.1 0.8-0.3 1.7-0.5 2.5 -0.4 1.7-0.9 3.5-1.9 5.3 -0.5 0.9-1.1 1.7-1.9 2.4 -0.4 0.3-0.8 0.7-1.3 0.9 -0.5 0.3-1.1 0.5-1.5 0.6 -2.2 0.6-4.5-0.2-6.2-1.5 -1.7-1.3-3-3.1-3.9-5 -0.9-1.9-1.4-3.9-1.5-5.9 -0.1-2 0.2-3.9 1-5.6 0.2-0.4 0.4-0.8 0.6-1.2 0.3-0.4 0.5-0.8 0.8-1.1 0.5-0.7 1.1-1.2 1.8-1.7 1.3-1 2.6-1.5 3.9-1.8 1.2-0.3 2.4-0.3 3.3-0.1 0.9 0.1 1.6 0.4 2 0.6C26.1 35.5 26.3 35.6 26.3 35.6z"/></svg>
+            </div>
+
+            <div class='container'>
+                <h1 class="sets btn welcome" id="play">Let's play !</h1>
+                <div class="sets  options chooses disable" id="humvscomp">
+                    <h2 class="btn"  id="human">human</h2>
+                    <h1 class="vs">vs</h1>
+                    <h2 class="btn"  id="computer">computer</h2>
+                </div>
+                <div class="sets  options destiny disable" id="xvso">
+                    <h2 class="btn" id="x">X</h2>
+                    <h1 class="vs">vs</h1>
+                    <h2 class="btn" id="o">O</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="winner"></div>
+        <div id="board" class="disable">
+
+            <svg version="1.1" id="gameboard" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 231.9 179.6" style="enable-background:new 0 0 231.9 179.6;" xml:space="preserve">
+
+  <g id="tictactoe">
+    <path id="left" class="drawboard" d="M59.5,0c-3.6,60.8-1.8,122,5.3,182.5"/>
+      <path id="right" class="drawboard" d="M131.9,1.3c7.5,22.9,6.3,47.5,5,71.5c-1.7,32.6-3.5,65.2-5.2,97.8"/>
+      <path id="top" class="drawboard" d="M0,75.6c75.3-12.8,151.1-22.8,227.2-30.1"/>
+      <path id="bottom" class="drawboard" d="M-0.8,128.8c77.9-0.5,155.7-6.6,232.7-18.4"/>
+  </g>
+                <g id="x">
+    <g id="x2">
+      <path id="x327" class="st0" d="M183.1,4.6c-3.7,10.4-7.8,20.7-12.5,30.7"/>
+        <path id="x317" class="st0" d="M159.6,6.8c6.9,9.8,15.4,18.5,24.9,25.8"/>
+    </g>
+                    <g id="x7">
+      <path id="x326" class="st0" d="M101.8,141.7c-5.6,4.9-3.4,14.9-8.5,20.4"/>
+                        <path id="x316" class="st0" d="M86.6,143.9c6.4,5.1,12.8,10.3,19.3,15.4"/>
+    </g>
+                    <g id="x3">
+      <path id="x325" class="st1" d="M36.2,88.9c-7.3,6.4-13.6,14-18.3,22.5"/>
+                        <path id="x315" class="st1" d="M14,90.3c4.1,4.6,8.1,9.1,12.2,13.7"/>
+    </g>
+                    <g id="x6">
+      <path id="x324" class="st0" d="M40.3,149.1c-6.3,6.2-12,13-17.3,20.1"/>
+                        <path id="x314" class="st0" d="M22.4,148.1c6.1,8.3,11.8,16.9,16.8,25.9"/>
+    </g>
+                    <g id="x0">
+      <path id="XMLID_133_" class="st2" d="M14.7,24.1C20.9,32.8,27,41.5,33,50.4"/>
+                        <path id="XMLID_134_" class="st2" d="M15.4,49.1c1.2-1.6,1.5-3.6,1.9-5.5c1-5.2,2.5-10.3,4.4-15.2c0.8-2.1,1.9-4.3,3.9-5.1"/>
+    </g>
+                    <g id="x1">
+      <path id="XMLID_135_" class="st3" d="M82.7,21.3c5.6,5.9,11.2,11.8,16.7,17.7"/>
+                        <path id="XMLID_138_" class="st3" d="M101.8,23.3C84.7,41.4,80.4,40.4,80.4,40.4"/>
+    </g>
+                    <g id="x4">
+      <path id="XMLID_137_" class="st3" d="M78.2,81.1c8.2,7.6,16,15.7,23.3,24.2"/>
+                        <path id="XMLID_139_" class="st3" d="M105.2,76.7c-5,11.8-12.5,22.4-21.9,31.1"/>
+    </g>
+                    <g id="x5">
+      <path id="XMLID_141_" class="st3" d="M165.2,67.5c9.6,8.9,18.7,18.4,27.3,28.3"/>
+                        <path id="XMLID_140_" class="st3" d="M196.7,62.4c-5.9,13.8-14.6,26.3-25.6,36.4"/>
+    </g>
+                    <g id="x8">
+      <path id="XMLID_142_" class="st3" d="M163.1,139.5c11.5,10.5,23.1,20.9,34.9,31.1"/>
+                        <path id="XMLID_144_" class="st3" d="M165.2,168.3c2.1,1.2,4.7-0.3,6.6-1.8c12.7-10,23.3-22.2,33.8-34.4"/>
+    </g>
+  </g>
+                <g id="o">
+    <path id="o1" class="st0" d="M98.5,17.2c-2.7,0.6-5.2-1.6-7.8-2.5c-5.2-1.7-10.7,1.7-14.1,6c-5.2,6.5-7.1,16.6-1.8,23
+      c1.1,1.3,2.4,2.4,4.1,2.7c2.6,0.5,5.2-1,7.4-2.6c6.7-5,12.6-10.9,17.6-17.6c0.9-1.2,1.7-2.4,2-3.9c0.4-2.3-1-4.6-2.8-6
+      c-1.9-1.4-4.1-2.1-6.4-2.8"/>
+                    <path id="o5" class="st0" d="M180.2,72.9c-4-3.5-10.7-3.1-14.6,0.5s-4.9,9.9-2.6,14.8c1.1,2.5,3.3,4.7,6,4.8c1.5,0,2.8-0.6,4.1-1.4
+      c3.5-2,6.7-4.6,9.4-7.6c1.8-2.1,3.5-4.5,3.6-7.2c0.3-4.8-4-8.6-8.4-10.7"/>
+                    <path id="o8" class="st0" d="M183.5,138.2c-2.2-3.3-6.1-5.7-9.9-4.8c-2.4,0.6-4.3,2.3-5.9,4.1c-2.4,2.8-4.5,6.4-3.6,10
+      c1.1,4.6,6.1,6.8,10.7,7.9c1.5,0.3,3,0.6,4.4,0c1.8-0.8,2.7-2.6,3.5-4.4c1.8-4.1,3.7-8.3,3.8-12.7c0.1-4.5-1.9-9.3-6-11.1"/>
+                    <path id="o4" class="st0" d="M95.9,83.3c-3.2,1.2-6.3,2.7-8.8,5.1c-2.4,2.4-4,5.9-3.4,9.2c0.6,3.4,3.6,6.2,7,6.6s7-1.5,8.4-4.6
+      c0.9-1.8,1-3.9,1.1-6c0.2-2.5,0.3-5.2-0.6-7.5c-0.9-2.4-3.2-4.4-5.7-4.1"/>
+                    <path id="o0" class="st0" d="M26.3,35.6c-4-2.2-9.6-0.1-11.9,3.9s-1.7,9.2,0.6,13.2c1.8,3.1,5.1,5.9,8.6,5.2c4.3-0.9,6.1-6,7-10.4
+      c0.3-1.3,0.5-2.6,0.1-3.9c-1-3-5-3.5-8.2-3.5"/>
+                    <path id="o3" class="st3" d="M29.7,94.6c-0.2,1.9-1.5,3.5-3.2,4.4s-3.6,1.2-5.5,1.2c-0.6,0-1.2,0-1.8-0.2c-0.6-0.2-1.1-0.7-1.6-1.2
+      c-1.9-2-2.9-4.8-3-7.6c-0.1-2.8,0.8-5.5,2.2-7.9c0.4-0.7,0.9-1.4,1.6-1.9c0.6-0.4,1.2-0.5,1.9-0.6c2.2-0.1,4.4,1,5.9,2.6
+      c1.6,1.6,2.6,3.6,3.7,5.5c0.6,1.1,1.2,2.2,1.8,3.3c0.5,0.9,1,1.9,1,3c0,1.1-0.7,2.2-1.7,2.4"/>
+                    <path id="o6" class="st3" d="M39.3,150.9c0.9-1.8,0.5-4.1-0.6-5.9s-2.9-2.9-4.7-3.9c-4.2-2.2-9-3.3-13.8-3.1
+      c-0.8,0-1.7,0.1-2.4,0.6c-1.8,1.2-1.5,3.8-0.7,5.8c1.2,3.3,3,6.4,5.3,9.1c2.2,2.6,5,5,8.4,5.9c3.3,0.9,7.3,0.1,9.5-2.5
+      c1.1-1.3,1.8-3.1,2-4.8c0.3-2.2,0-4.6-1.1-6.5"/>
+                    <path id="o2" class="st3" d="M187.3,22.4c-5-2.1-10.7-2.6-16-1.5c-0.8,0.2-1.6,0.4-2.2,0.8c-0.8,0.5-1.4,1.4-1.8,2.3
+      c-1.7,3.5-1.7,8,0.8,10.9c0.5,0.6,1.1,1.1,1.9,1.4c0.6,0.2,1.2,0.2,1.8,0.2c3.5,0.1,7,0.1,10.5-0.6c2-0.4,4-1.1,5.5-2.5
+      c1.5-1.4,2.4-3.6,1.8-5.6c-0.7-2.2-2.9-3.7-3.3-5.9"/>
+                    <path id="o7" class="st3" d="M101.6,144.1c-4-0.8-8.3-0.9-12,0.9s-6.2,6.2-5,10.1c0.8,2.7,3.1,4.6,5.7,5.8c5.9,2.8,13.5,2,18.7-2.1
+      c0.6-0.5,1.2-1,1.7-1.7c0.5-0.7,0.8-1.5,1-2.3c0.5-2.4-0.6-4.8-2.2-6.6c-2.5-2.9-6.3-4.6-10.1-4.4"/>
+  </g>
+                <g id="winnerset">
+    <path id="win0" class="st4" d="M7.7,54.1c0,0,84.3-34.3,196.3-28.3"/>
+                    <path id="win1" class="st4" d="M11.4,93.3c0,0,55,7.4,198.8-8.6"/>
+                    <path id="win2" class="st4" d="M20.6,15.6c0,0,1.4,192.9,10.4,154.9"/>
+                    <path id="win3" class="st4" d="M7.7,143.9c0,0,131.5,24.7,189.8-10.5"/>
+                    <path id="win4" class="st4" d="M91.9,8.4c0,0,12,157.5,0,167.5"/>
+                    <line id="win5" class="st4" x1="177.9" y1="170.7" x2="174.9" y2="2.4"/>
+                    <path id="win6" class="st4" d="M10.4,28.4c0,0,88.5,93.5,193.5,135.3"/>
+                    <path id="win7" class="st4" d="M19.4,165.4C58.8,119.6,108,72.7,169.2,30.8c9.5-6.5,18.9-12.6,28.2-18.4"/>
+  </g>
+  </svg>
+
+            <div class="tile" ></div>
+            <div  class="tile" ></div>
+            <div  class="tile" ></div>
+            <div  class="tile" ></div>
+            <div  class="tile" ></div>
+            <div  class="tile"></div>
+            <div  class="tile"></div>
+            <div  class="tile"></div>
+            <div  class="tile"></div>
+            <div id="reset" class="btn"><h1>reset</h1></div>
+        </div>
+    </div>
+</div>
+<div>
+
+    <script>
+        // btns class, flex posistion, improve switch function
+
+var drawboard = document.getElementById('tictactoe'),
+    winnerset = document.getElementById('winnerset').children,
+    gameBoard = document.getElementById('board'),
+    play = document.getElementById('play'),
+    winner = document.getElementById('winner'),
+    res = document.getElementById('reset'),
+    tiles = document.getElementsByClassName('tile'),
+    signs = document.getElementsByClassName('sign'),
+    opponent = document.getElementById("opponent"),
+    settings = document.getElementById("settings"),
+    humvscomp = document.getElementById("humvscomp"),
+    xvso = document.getElementById("xvso"),
+    options = document.getElementsByClassName("options"),
+    btns = document.getElementsByClassName('btn'),
+    sets = document.getElementsByClassName('sets'),
+    welcome = document.getElementsByClassName('welcome'),
+    chooses = document.getElementsByClassName('chooses'),
+    destiny = document.getElementsByClassName('destiny'),
+    options = document.getElementsByClassName('options'),
+    human,
+    computer,
+    humVal,
+    comVal,
+    palyer1,
+    player2,
+    player1val,
+    player2val,
+    game,
+    board = [0,0,0,0,0,0,0,0,0],
+    round = 0,
+    winningBoard = [
+       [0, 1, 2],
+       [3,4,5],
+       [0,3,6],
+       [6,7,8],
+       [1,4,7],
+       [2,5,8],
+       [0,4,8],
+       [2,4,6]
+];
+
+
+//drawingWithDelay(winnerset[1], 0.5, 0.5);
+
+
+HTMLElement.prototype.addClass = function(el) {
+ this.classList.add(el);
+}
+HTMLElement.prototype.removeClass = function(el) {
+  this.classList.remove(el);
+}
+
+// drawing svg elemts
+// if var element contains more then one html element, do delay between each animation to                                                   // achieve hand drawing effect
+// if element has childs,
+// check for the elemts nodes
+// Loop through an array of elements, if element's childs
+//nodeType = 1 ad some style: animation to it with delay beetwen each node
+function drawingWithDelay(element, newTime, newDelay) {
+var time = newTime;
+if (element.hasChildNodes())  {
+   var delay = 0,
+   child = element.childNodes;
+        for(var d=0; d<child.length; d++) {
+          if(child[d].nodeType == 1) {
+           var length = Math.ceil(child[d].getTotalLength());
+           console.log('lenght '+d+' '+length);
+          child[d].style.strokeDasharray = length;
+          child[d].style.strokeDashoffset = length;
+          child[d].style.animation = 'dash '+time+'s ease-out  '+delay+ 's   forwards';
+          delay +=  newDelay;
+          }
+       }
+    } else {
+      var length = Math.ceil(element.getTotalLength());
+       console.log('lenght '+length);
+       element.style.strokeDasharray = length;
+       element.style.strokeDashoffset = length;
+        element.style.animation = 'dash 0.5s ease-out  forwards';
+      }
+ }
+
+
+// when human vs human set position of the player on the board
+// sign number = nbr of the cell in the ticktack toe board
+// if player1 true - player 1 turn, do the staff so the player's sign appears on the board
+// find html id element using (player?val plus signNumber) sigNumber - is index of click event from claim function
+// draw sign than change turn by swich the boolen of player var
+
+   function setPlayer(signNumber) {
+     if (player1) {
+        board[signNumber] = player1val;
+        var sign =  document.getElementById(player1val+signNumber);
+        drawingWithDelay(sign, 0.3, 0.3)
+        updateScore(board, player1);
+        player1 = false;
+        player2 = true;
+     } else {
+        board[signNumber] = player2val;
+        var sign =  document.getElementById(player2val+signNumber);
+        drawingWithDelay(sign, 0.3, 0.3)
+        updateScore(board, player2);
+        player1 = true;
+        player2 = false;
+     }
+   }
+//human vs com set the players position ob the board,
+//works when game is true,
+//if spot on teh bord is empty board[i] == 0,
+// at then end of human turn  lunch ai() - computer move
+
+function set(index, player) {
+    if(game) {
+       if(board[index] == 0) {
+           if (computer) {
+               if(player == human) {
+                var sign =  document.getElementById(humVal+index);
+                drawingWithDelay(sign, 0.3, 0.3);
+                board[index] = humVal;
+                console.log(board);
+                updateScore(board, player);
+                ai();
+             }  else {
+                board[index] = comVal;
+                var sign =  document.getElementById(comVal+index);
+                setTimeout(function() {
+                  drawingWithDelay(sign, 0.3, 0.3);
+                  }, 500);
+                updateScore(board, player);
+                }
+            }
+        }
+      }
+  console.log(board);
+}
+
+// update score on the board,
+// draw winners line and message for winner when checkWin() return true
+function updateScore(board, player) {
+ if (computer) {
+   if (player == computer) {
+      if (checkWin(board, player)) {
+        game = false;
+        setTimeout(function() {
+        drawTheWinnersLine(board);
+        winner.innerHTML ="<h1>You loose !</h1>";
+        }, 1400);
+      return;
+      }
+     }
+   else if (player = human){
+   if (player == human) {
+      if (checkWin(board, player)) {
+         game = false;
+         drawTheWinnersLine(board);
+         setTimeout(function() {
+         winner.innerHTML ="<h1>You won !</h1>";
+        }, 1000);
+      return;
+        }
+      }
+   }
+ }
+ else if (human){
+    if (player == player1) {
+      if (checkWin(board, player)) {
+      game = false;
+      drawTheWinnersLine(board);
+      setTimeout(function() {
+      winner.innerHTML ="<h1>player1 won !</h1>";
+        }, 1000);
+      return;
+      }
+    }  else {
+      if (checkWin(board, player)) {
+         game = false;
+         drawTheWinnersLine(board);
+         setTimeout(function() {
+         winner.innerHTML ="<h1>player2 won !</h1>";
+        }, 1000);
+      return;
+      }
+
+    }
+  }
+  if (checkBoard(board)) {
+     //  console.log(cb);
+      setTimeout(function() {
+       winner.innerHTML= "<h1>Tie !</h1>";
+       //reset();
+      }, 1000);
+      return;
+   }
+  }
+
+// draw the winners line throught 3 equal signs laying next to each other
+function drawTheWinnersLine(board) {
+  var inedx;
+  for (var x = 0; x < 8; x++ ) {
+    // arr will contain signs from board according to each winningboard section
+    var arr=[];
+    var equals;
+    for (var y=0; y<3; y++) {
+   arr.push(board[winningBoard[x][y]])
+        }
+    //when there gonna be 3 same signs in section, which are not a number, then we can draw a winner's line - winner sequence section from winning board and winners line in svg has same index
+    var equals = arr.every(function(value, index, array){
+    return (value === array[0] && isNaN(value) ) ? true : false});
+    console.log(equals);
+    if (equals) {
+      console.log('x '+x);
+      drawingWithDelay(winnerset[x], 1, 1)
+    }
+  }
+
+    }
+
+// check if there's a winner
+function checkWin(board,player) {
+  var value
+  if (computer) {
+  value = player == human ? humVal : comVal;
+  }
+  else if (human) {
+  value = player == player1 ? player1val : player2val;
+  }
+  // loop through winningboard to find win sequence
+  for (var x = 0; x < 8; x++ ) {
+    var win = true;
+    for(var y=0; y<3; y++) {
+       if(board[winningBoard[x][y]] !=value)  {
+         win = false;
+         break;
+       }
+    }
+    if(win) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+// check if board is full,
+function checkBoard (board) {
+for (var i = 0; i<board.length; i++) {
+    if (board[i] == 0) {
+      return false;
+    }
+  }
+ return true;
+ }
+
+// reset button
+// click button on tic tac toe board
+for (var i=0; i < tiles.length; i++) {
+tiles[i].addEventListener('click', claim);
+}
+function claim() {
+  //round +=1;
+  var i = Array.prototype.indexOf.call(tiles, this);   // take index of DOMs tiles class element
+  console.log(i);
+  if(game) { // board is active onlny when game is on
+     if(board[i] == 0) {
+       if (human) {   // set human vs human plaers moves
+         setPlayer(i);
+       }
+       else if (computer) {
+              set(i, human); // set human vs computer plaers moves
+              }
+            }
+          }
+        }
+
+  // seetings
+ // switch classes for seetings slides
+function switchClass (elementsToHide, elementsToShow) {
+ for (var i =0; i< elementsToHide.length; i++){
+   elementsToHide[i].addClass('disable');
+    }
+  for (var j =0; j< elementsToShow.length; j++){
+    if (j===0) {
+     elementsToShow[j].addClass('fadeBounceIn');
+    }
+     if ( j > 0) {
+       elementsToShow[j].addClass('fadeIn');
+        }
+       elementsToShow[j].removeClass('disable');
+      }
+    }
+ //for (var i = 0; i< elementsToShow.length; i++) {
+
+switchClass (sets, welcome);
+
+ for (var i =0; i< btns.length ; i++){
+   btns[i].addEventListener('click', function () {
+    var elemnt = this.id;
+    console.log(elemnt);
+    choose(elemnt);
+  });
+ }
+
+function choose(id) {
+ // first we choose our opponent, if human is true we play against other human player if computer is true we play with ai
+   if (id == 'play') {
+   switchClass (sets, chooses);
+  }
+
+  else if (id == 'reset') {
+   reset();
+  }
+
+else if (id == 'human') {
+   human = true;
+   computer = false;
+   switchClass (sets, destiny);
+ }
+ else if (id == 'computer') {
+   human = false;
+   computer = true;
+   switchClass (sets, destiny);
+ }
+  // when we know  our opponent we can chooseour sign. When computer condition is true we choose sign for human player
+  else if (computer) {
+    if (id == 'o' || id == 'x') {
+      if (id == 'x') {
+        humVal = 'x'
+        comVal = 'o'
+      }
+      else {
+        humVal = 'o'
+        comVal = 'x'
+      }
+      game = true;
+      startGame();
+    }
+  }
+ // If human condition is true we choose sign for player 1 with our first choice
+  else if (human){
+    if (id == 'o' || id == 'x') {
+      if (id == 'x') {
+        player1val = 'x';
+        player2val = 'o';
+    } else   {
+      player2val = 'x';
+      player1val = 'o';
+    }
+  }
+    game = true;
+    startGame();
+}
+  console.log ('human :'+human+ " " + "computer :" + computer);
+  console.log ('player1val: ' + player1val);
+  console.log ('player2val: ' + player2val);
+  console.log ('humVal: ' + humVal);
+  console.log ('comVal: ' + comVal)
+  console.log ('game: ' + game)
+}
+
+
+function startGame() {
+  settings.addClass('disable');
+  gameBoard.removeClass('disable');
+  drawingWithDelay(drawboard, 0.5, 0.5);
+  player1 = true;
+}
+
+// reset the game
+function reset() {
+  window.location = window.location;
+  round = 0;
+  for(var x= 0; x<9 ;x++) {
+    board[x] = 0;
+  }
+  game = false;
+}
+
+
+function ai() {
+  if (game) {
+ console.log('computer move');
+ var obj = minimax(board, 0 , computer);
+ console.log('outside ' +board + 'obj '+obj);
+
+  }
+}
+
+function minimax(actualBoard, depth, player) {
+ // check if there is a winner, if yes return points
+       if(checkWin(actualBoard, computer)) {
+      // console.log('computer win :' +(10 - depth));
+      return 10 - depth ;
+     }
+    else if(checkWin(actualBoard, human)) {
+      //console.log('human win :' + (-10 + depth));
+      return -10 + depth ;
+     }
+   else if (checkBoard(actualBoard)) {
+    // console.log('tie :' + 0);
+    return 0;
+  }
+
+  // set the first of maximum values for each players
+  var max;
+  if (player) {
+    max = -Infinity
+  }
+  else{
+  max = Infinity
+  }
+  // index of the move
+var index = 0;
+
+   //console.log('max :'+max) ;
+
+
+  for (var i =0; i<actualBoard.length; i++) {
+
+    // copy of the board for comp vs human moves simulation purpose
+      var copyBoard = actualBoard.slice();
+
+         if(copyBoard[i] == 0) {
+           // console.log('start for lop, i ='+i+' ,depth = '+depth)
+
+           // set the actual player value
+           var value = player == computer ? comVal : humVal ;
+
+           // make a move
+           copyBoard[i] = value;
+           // console.log('inside for loop max: '+ max+', '   +' player '+ player+' i '+ i+', depth :'+depth );
+           //var index = i;
+
+           // minimax score = minimax calls itself to check best move of opposite player
+           var minmaxScore = minimax(copyBoard, depth + 1, !player)
+           //console.log('after minimax: '+ max+', minmaxScore :'+minmaxScore  +' player '+ player+' index '+ index+', depth :'+depth );
+
+           // after the minimax digs to the deeper level of the game with winning sequence, it brings back the winnig points to minimaxScore -
+           //console.log('if player comp or human ? :'+player)
+
+           // after each move simulation , on each depth level, function choose the best possible move.
+           // minimaxScore is compared to max value in order to minimize the maximum possible loss.
+      if(player) {
+      if(minmaxScore > max) {
+       // console.log('is minimaxScore'+minmaxScore+ " > "+"max"+max)
+        max = minmaxScore;
+        index = i;
+        //console.log(max);
+        }
+      }
+      else {
+        if(minmaxScore < max) {
+          //console.log('is minimaxScore'+minmaxScore+ " < "+"max"+max)
+        max = minmaxScore;
+        index = i;
+        // console.log(max);
+        }
+      }
+
+    }
+  }
+
+// when finally function reach back its depth 0 level, it can make a move according to index - movie where best max value was achieved.
+if (depth == 0) {
+// console.log('teraz depth 0')
+
+   set(index, computer);
+  //console.log(player +" "+ max);
+}
+ //console.log(player +" "+ max)
+   //console.log('the end, max: '+ max+', minmaxScore :'+minmaxScore  +' player '+ player+' index '+ index+', depth :'+depth );
+
+ // return max value to the previus level depth
+ return max;
+}
+
+play.addEventListener
+    </script>

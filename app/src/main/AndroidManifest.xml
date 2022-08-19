@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mrwekayt.settings.app">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.Ad_ID" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/wekaicon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/wekaicon"
+        android:name=".ApplicationClass"
+        android:theme="@style/Theme.WekaAPK">
+        <activity
+            android:name="com.mrwekayt.settings.app.SplashScreen"
+            android:label="@string/app_name"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Theme.WekaAPK.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.mrwekayt.settings.app.MainActivity"
+            android:label="@string/app_name"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Theme.WekaAPK.NoActionBar"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.MainOptions"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.MoreAppsActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.DiamondsActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.GamesActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.FingersActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.hudSettings"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.HeadshotChoose"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.ComputerEmulators"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.ComputerSettings"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.ComputerSensetive"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.FireBtnActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.PointerActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.HaveDpiActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.ui.PlayGame"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.SensetiveActivity"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.MobileSpecActivity"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.GraphicSettings"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.DpiActivity"
+            android:label="@string/app_name"
+            />
+        <activity android:name="com.mrwekayt.settings.app.AboutActivity"
+            android:label="@string/app_name"
+            />
+
+
+        <service android:name=".FirebaseMessageReceiver">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9982104187674434~4613282486"/>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/wekalogo" />
+
+        <meta-data android:name="com.startapp.sdk.APPLICATION_ID" android:value="203768231" />
+
+
+    </application>
+
+</manifest>

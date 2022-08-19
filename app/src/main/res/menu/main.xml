@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/share3"
+        android:orderInCategory="100"
+        android:title="Share"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/star"
+        android:icon="@drawable/youtube__icon"
+        android:orderInCategory="100"
+        android:title="Youtube"
+        app:showAsAction="ifRoom" />
+</menu>

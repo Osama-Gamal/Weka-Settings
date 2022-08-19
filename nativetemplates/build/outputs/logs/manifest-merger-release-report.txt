@@ -1,0 +1,29 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml:1:1-8:12
+	package
+		ADDED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml:2:3-51
+		INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+		INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml:3:3-5:17
+	android:supportsRtl
+		ADDED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml:3:16-42
+uses-sdk
+INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+		ADDED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+		INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+		ADDED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
+		INJECTED from /run/media/osama/LinuxApps/Android Projects/WekaAPK v6/WekaAPK v 6/WekaAPK/nativetemplates/src/main/AndroidManifest.xml
