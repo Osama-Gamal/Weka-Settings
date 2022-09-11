@@ -23,16 +23,6 @@
             android:orientation="vertical">
 
 
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                app:adSize="BANNER"
-                app:adUnitId="ca-app-pub-9982104187674434/2480877505"></com.google.android.gms.ads.AdView>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -236,16 +226,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
-
-                <com.google.android.ads.nativetemplates.TemplateView
-                    android:id="@+id/my_template"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
-                    android:visibility="invisible"
-                    app:gnt_template_type="@layout/gnt_medium_template_view" />
 
 
             </LinearLayout>

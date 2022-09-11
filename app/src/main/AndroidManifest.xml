@@ -103,23 +103,6 @@
             />
 
 
-        <service android:name=".FirebaseMessageReceiver">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9982104187674434~4613282486"/>
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/wekalogo" />
-
-        <meta-data android:name="com.startapp.sdk.APPLICATION_ID" android:value="203768231" />
-
-
     </application>
 
 </manifest>

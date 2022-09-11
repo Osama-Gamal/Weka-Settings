@@ -63,16 +63,6 @@
                     app:strokeColor="#FFC107"
                     app:strokeWidth="2dp" />
 
-                <com.google.android.ads.nativetemplates.TemplateView
-                    android:id="@+id/my_template"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="5dp"
-                    android:visibility="gone"
-                    app:gnt_template_type="@layout/gnt_medium_template_view" />
-
 
             </LinearLayout>
 

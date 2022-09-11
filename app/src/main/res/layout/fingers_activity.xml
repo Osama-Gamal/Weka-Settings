@@ -26,15 +26,6 @@
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/twofingers1" />
-            <com.google.android.ads.nativetemplates.TemplateView
-                android:id="@+id/my_template1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:visibility="gone"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                app:gnt_template_type="@layout/gnt_medium_template_view" />
 
             <ImageView
                 android:id="@+id/img2"
@@ -44,15 +35,6 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/twofingers2" />
 
-            <com.google.android.ads.nativetemplates.TemplateView
-                android:id="@+id/my_template2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:visibility="gone"
-                app:gnt_template_type="@layout/gnt_medium_template_view" />
 
             <ImageView
                 android:id="@+id/img3"
@@ -61,15 +43,6 @@
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/advertisement" />
-            <com.google.android.ads.nativetemplates.TemplateView
-                android:id="@+id/my_template3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:visibility="gone"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                app:gnt_template_type="@layout/gnt_medium_template_view" />
 
             <ImageView
                 android:id="@+id/img4"
@@ -78,15 +51,6 @@
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/advertisement" />
-            <com.google.android.ads.nativetemplates.TemplateView
-                android:id="@+id/my_template4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:visibility="gone"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                app:gnt_template_type="@layout/gnt_medium_template_view" />
 
             <ImageView
                 android:id="@+id/img5"
@@ -95,15 +59,6 @@
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/advertisement" />
-            <com.google.android.ads.nativetemplates.TemplateView
-                android:id="@+id/my_template5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:visibility="gone"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                app:gnt_template_type="@layout/gnt_medium_template_view" />
 
             <ImageView
                 android:id="@+id/img6"
@@ -112,16 +67,6 @@
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/advertisement" />
-            <com.google.android.ads.nativetemplates.TemplateView
-                android:id="@+id/my_template6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:visibility="gone"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                app:gnt_template_type="@layout/gnt_medium_template_view" />
-
 
 
             <LinearLayout

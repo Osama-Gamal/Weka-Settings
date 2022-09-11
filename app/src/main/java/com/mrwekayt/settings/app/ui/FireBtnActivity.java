@@ -18,17 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.ads.nativetemplates.NativeTemplateStyle;
-import com.google.android.ads.nativetemplates.TemplateView;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdLoader;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.nativead.NativeAd;
 import com.mrwekayt.settings.app.R;
 
 import java.io.File;
@@ -36,7 +25,6 @@ import java.io.File;
 public class FireBtnActivity extends AppCompatActivity {
 
     TextView button_text;
-    AdView adView;
     Button acceptBtn;
 
     @Override
@@ -51,25 +39,8 @@ public class FireBtnActivity extends AppCompatActivity {
 
 
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
 
 
-
-
-        /*Handler handler = new Handler();
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(!NativeadLoaded){
-                    startAppMrec.setVisibility(View.VISIBLE);
-                }
-            }
-        }, 3000);*/
 
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override

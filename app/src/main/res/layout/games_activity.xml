@@ -20,15 +20,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:adSize="BANNER"
-                android:layout_gravity="center"
-                app:adUnitId="ca-app-pub-9982104187674434/2480877505"></com.google.android.gms.ads.AdView>
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/xoGameBtn"
                 android:layout_width="match_parent"
@@ -80,16 +71,6 @@
 
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:adSize="SMART_BANNER"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                app:adUnitId="ca-app-pub-9982104187674434/2480877505"></com.google.android.gms.ads.AdView>
 
 
             <com.google.android.material.card.MaterialCardView
@@ -146,12 +127,6 @@
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.ads.nativetemplates.TemplateView
-                android:id="@+id/my_template"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                app:gnt_template_type="@layout/gnt_medium_template_view" />
 
 
             <com.google.android.material.card.MaterialCardView
@@ -206,16 +181,6 @@
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
-
-
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:adSize="SMART_BANNER"
-                android:layout_marginTop="10dp"
-                app:adUnitId="ca-app-pub-9982104187674434/2480877505"></com.google.android.gms.ads.AdView>
 
 
             <com.google.android.material.card.MaterialCardView

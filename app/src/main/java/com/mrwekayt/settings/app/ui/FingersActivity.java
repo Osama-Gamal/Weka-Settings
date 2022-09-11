@@ -16,19 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.ads.nativetemplates.NativeTemplateStyle;
-import com.google.android.ads.nativetemplates.TemplateView;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdLoader;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.google.android.gms.ads.nativead.NativeAd;
 import com.mrwekayt.settings.app.MobileSpecActivity;
 import com.mrwekayt.settings.app.R;
 
@@ -57,20 +44,6 @@ public class FingersActivity extends AppCompatActivity {
         img6.setVisibility(View.GONE);
 
 
-        TemplateView template1 = findViewById(R.id.my_template1);
-        TemplateView template2 = findViewById(R.id.my_template2);
-        TemplateView template3 = findViewById(R.id.my_template3);
-        TemplateView template4 = findViewById(R.id.my_template4);
-        TemplateView template5 = findViewById(R.id.my_template5);
-        TemplateView template6 = findViewById(R.id.my_template6);
-
-
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
 
 
 

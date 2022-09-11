@@ -84,16 +84,6 @@
                 android:orientation="horizontal">
 
 
-                <com.google.android.ads.nativetemplates.TemplateView
-                    android:id="@+id/my_template"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:visibility="invisible"
-                    android:layout_marginRight="10dp"
-                    app:gnt_template_type="@layout/gnt_medium_template_view" />
-
 
             </LinearLayout>
         </LinearLayout>
